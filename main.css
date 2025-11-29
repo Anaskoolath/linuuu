@@ -1,0 +1,135 @@
+/* Animated pink/red gradient background */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body {
+    font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    background: linear-gradient(-45deg, #ff9aa2, #ff758f, #ff5c8a, #ffb3c6);
+    background-size: 400% 400%;
+    animation: gradientShift 18s ease infinite;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Glassmorphism card adjusted for warm/pink look */
+.glass-card {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(8px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.love-card { border: 1px solid rgba(255,200,220,0.18); }
+
+/* Input field styling */
+.input-field {
+    background: rgba(255, 255, 255, 0.06);
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    transition: all 0.28s cubic-bezier(.2,.9,.3,1);
+    color: #fff;
+}
+
+.input-field::placeholder { color: rgba(255, 255, 255, 0.72); }
+
+.input-field:focus {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 182, 193, 0.95);
+    box-shadow: 0 6px 30px rgba(255, 105, 180, 0.12);
+    outline: none;
+}
+
+/* Love button */
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.06); }
+    40% { transform: scale(0.98); }
+    60% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+.btn-love {
+    background: linear-gradient(135deg,#ff6b92,#ff2d6f);
+    transition: transform .18s ease, box-shadow .18s ease;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}
+
+.btn-love:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(255,80,120,0.25); animation: heartbeat 1.2s ease-in-out infinite; }
+.btn-love:active { transform: translateY(0); animation: none; }
+.heart-btn { margin-right: 8px; font-size: 1.05em; }
+
+/* Title styling */
+/* Minimal heading: use simple sans-serif and remove decorative shadow */
+.love-title { font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; font-weight: 600; color: #fff; text-shadow: none; letter-spacing: 0.2px; }
+.dedication { color: rgba(255,255,255,0.92); margin-top: -4px; }
+
+/* Floating hearts */
+@keyframes floatUp {
+    0% { transform: translateY(30px) scale(0.6); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(-400px) scale(1); opacity: 0; }
+}
+
+.floating-heart {
+    position: fixed;
+    bottom: -30px;
+    pointer-events: none;
+    will-change: transform, opacity;
+    z-index: 9999;
+    animation: floatUp var(--dur, 6s) linear forwards;
+}
+
+.heart-shape {
+    display: inline-block;
+    width: 22px; height: 22px;
+    background: linear-gradient(180deg,#ff6b92,#ff2d6f);
+    transform: rotate(-45deg);
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 6px 20px rgba(255,80,120,0.18);
+}
+.heart-shape::before, .heart-shape::after{
+    content: '';
+    position: absolute; width: 22px; height: 22px; border-radius: 50%;
+    background: inherit; transform: translate(-50%,-50%);
+}
+
+/* smaller helpers for heart visuals */
+.floating-heart .heart-shape { position: relative; }
+
+/* Title and form animations */
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px);} to { opacity: 1; transform: translateY(0);} }
+.title { animation: fadeInDown 0.9s ease-out; }
+
+@keyframes slideUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
+.form-container { animation: slideUp 0.9s ease-out .25s both; }
+
+/* Icon styling */
+.input-icon { color: rgba(255,255,255,0.7); transition: color 0.3s ease; }
+input:focus ~ .input-icon { color: #fff; }
+
+/* Password toggle button (minimal) */
+.password-toggle {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 0.95rem;
+    line-height: 1;
+    color: rgba(255,255,255,0.95);
+}
+.password-toggle:focus { outline: 2px solid rgba(255,255,255,0.08); border-radius: 6px; }
+
+/* Shake animation for error */
+@keyframes shake { 0%,100%{ transform: translateX(0);} 10%,30%,50%,70%,90%{ transform: translateX(-6px);} 20%,40%,60%,80%{ transform: translateX(6px);} }
+.shake { animation: shake .45s ease-in-out; }
+
+/* Error styling */
+#error-message { display:none; background: rgba(255, 105, 135, 0.12); border: 1px solid rgba(255,105,135,0.25); color: #ffd2da; padding: 12px; border-radius: 10px; margin-top: 12px; font-size: .92rem; font-weight: 600; text-align:center; }
+
+/* Removed blinking caret for a minimal look */
+
+/* responsive tweaks */
+@media (max-width: 640px) { .love-title { font-size: 2rem; } .heart-shape { width: 18px; height: 18px; } }
